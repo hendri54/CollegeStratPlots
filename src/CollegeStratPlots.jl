@@ -6,9 +6,9 @@ using FilesLH
 using CollegeStratBase
 
 export plot_settings, plot_setting, plot_defaults, subplot_layout
-export blank_plot, sub_plots, histogram_plot
+export blank_plot, sub_plots, histogram_plot, scatter_plot, contour_plot
 export bar_graph, grouped_bar_graph
-export line_plot, add_line!
+export line_plot, add_line!, add_title!, plot_text
 export figsave
 
 include("plot_settings.jl");
@@ -53,6 +53,9 @@ function sub_plots(pV; kwargs...)
     return p
 end
 
+add_title!(p, titleStr; kwargs...) = title!(p, titleStr; kwargs...);
+
+plot_text(lbl, sz, pos) = Plots.text(lbl, sz, pos);
 
 # """
 # 	$(SIGNATURES)
@@ -124,6 +127,12 @@ function histogram_plot(dataV; kwargs...)
     p = plot(h; kwargs...)
     return p
 end
+
+function contour_plot(x, y, z; kwargs...)
+    p = contour(x, y, z; kwargs...);
+    return p
+end
+
 
 """
 	$(SIGNATURES)
